@@ -97,13 +97,16 @@ body {
   overflow-x: hidden;
 }
 
-/* Rotating full-viewport square background stage: 20 deg/min = 360 deg / 1080s */
+/* Static 45-deg '/' volumetric wave background + rotating floating shapes layer (20 deg/min = 360 deg / 1080s) */
 .bg-stage {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  background-color: var(--bg);
+  background-image: var(--pat-wave), var(--bg-wave-grad);
+  background-size: 320px 320px, 100% 100%, 100% 100%, auto;
 }
 .bg-rotator {
   position: absolute;
@@ -113,8 +116,6 @@ body {
   height: 185vmax;
   margin-left: -92.5vmax;
   margin-top: -92.5vmax;
-  background-image: var(--pat-wave), var(--bg-wave-grad);
-  background-size: 320px 320px, 100% 100%, 100% 100%, auto;
   will-change: transform;
   animation: spinBg 1080s linear infinite;
 }
