@@ -1186,122 +1186,16 @@ h1, .exp-h1 {
       </div>
     </div>
 
-    <!-- News Section with Exact 6-Block Asymmetric Grid -->
+    <!-- News Section with Exact 6-Block Asymmetric Grid (Randomized on each load) -->
     <div class="main-band-news">
       <div class="news-stage">
         <div class="news-schema-grid">
-          <!-- Left Column: 4 boxes matching Figma -->
-          <div class="news-left-col">
-            <article class="news-box">
-              <div class="news-meta">
-                <span class="news-tag">Шкільні новини</span>
-                <span>14 листопада 2026</span>
-              </div>
-              <h3>У школі відкрили оновлену STEM-лабораторію робототехніки та 3D-друку</h3>
-              <p>Новий кабінет оснащено 3D-принтерами, наборами мікроконтролерів і датчиків для практичних занять старшокласників з інформатики та інженерії.</p>
-            </article>
-
-            <article class="news-box">
-              <div class="news-meta">
-                <span class="news-tag">Наука · NASA</span>
-                <span>Світ науки</span>
-              </div>
-              <h3>Телескоп Джеймса Вебба досліджує далекі галактики та екзопланети</h3>
-              <p>Космічна обсерваторія NASA передає високоточні інфрачервоні спостереження далеких планетних атмосфер і процесів народження зір.</p>
-              <a class="news-link" href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer" data-action="news.ext.nasa">Читати на джерелі (NASA) →</a>
-            </article>
-
-            <article class="news-box">
-              <div class="news-meta">
-                <span class="news-tag">Шкільні новини</span>
-                <span>08 листопада 2026</span>
-              </div>
-              <h3>Команда 10-х класів перемогла на міському хакатоні з веброзробки</h3>
-              <p>Учні створили адаптивний сервіс шкільного розкладу з високою читабельністю інтерфейсу.</p>
-            </article>
-
-            <article class="news-box">
-              <div class="news-meta">
-                <span class="news-tag">Космос · ESA / Astro Pi</span>
-                <span>Освітній проєкт</span>
-              </div>
-              <h3>Школярі запускають власний код на Міжнародній космічній станції</h3>
-              <p>У межах European Astro Pi Challenge учні пишуть програми на Python для бортових сенсорів МКС.</p>
-              <a class="news-link" href="https://astro-pi.org/" target="_blank" rel="noopener noreferrer" data-action="news.ext.astropi">Читати на джерелі (Astro Pi) →</a>
-            </article>
-          </div>
-
-          <!-- Right Column: 2 boxes matching Figma 1:18 (top wide) + 1:21 (tall feature) -->
-          <div class="news-right-col">
-            <article class="news-box">
-              <div class="news-meta">
-                <span class="news-tag">Шкільні новини</span>
-                <span>03 листопада 2026</span>
-              </div>
-              <h3>Учні долучилися до екологічної акції «Зелений двір» та оновили шкільний сквер</h3>
-              <p>Спільними зусиллями старшокласників і викладачів на території закладу висаджено 40 молодих саджанців та облаштовано зону відпочинку для учнів.</p>
-            </article>
-
-            <article class="news-box tall-feature">
-              <div>
-                <div class="news-meta">
-                  <span class="news-tag">Шкільні новини</span>
-                  <span>01 листопада 2026</span>
-                </div>
-                <h3 style="margin-top:10px">Стартує осінній тиждень інформатики: квести, воркшопи та захист проєктів</h3>
-                <p style="margin-top:12px">
-                  Упродовж тижня на платформі EduPlatform відбудуться відкриті лекції ІТ-менторів, командний турнір із алгоритмів та воркшоп зі створення сучасних вебмакетів у Figma.
-                </p>
-                <p style="margin-top:10px">
-                  У фінальний день учасники представлять власні навчальні проєкти та отримають сертифікати й рекомендації від викладачів.
-                </p>
-              </div>
-
-              <div class="digest-list">
-                <div class="digest-item">
-                  <div class="news-meta">
-                    <span class="news-tag">Фізика · CERN</span>
-                    <span>Міжнародні дослідження</span>
-                  </div>
-                  <h4>Великий адронний колайдер: як працюють сучасні детектори частинок</h4>
-                  <p>Дослідники з десятків країн аналізують великі обсяги даних, вивчаючи фундаментальну будову матерії.</p>
-                  <a class="news-link" href="https://home.cern/science/accelerators/large-hadron-collider" target="_blank" rel="noopener noreferrer" data-action="news.ext.cern">Читати на джерелі (CERN) →</a>
-                </div>
-
-                <div class="digest-item">
-                  <div class="news-meta">
-                    <span class="news-tag">Освіта · UNESCO</span>
-                    <span>Цифрова грамотність</span>
-                  </div>
-                  <h4>ЮНЕСКО підтримує розвиток цифрової грамотності та STEM-освіти у школах</h4>
-                  <p>Освітні рекомендації спрямовані на формування навичок безпечної роботи з інформацією та технологіями.</p>
-                  <a class="news-link" href="https://www.unesco.org/en/education" target="_blank" rel="noopener noreferrer" data-action="news.ext.unesco">Читати на джерелі (UNESCO) →</a>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div class="news-left-col" id="newsLeftCol"></div>
+          <div class="news-right-col" id="newsRightCol"></div>
         </div>
 
         <!-- Extra news toggled by "більше новин" -->
-        <div class="news-schema-grid" id="moreNewsBox" style="margin-top:22px" hidden>
-          <article class="news-box">
-            <div class="news-meta">
-              <span class="news-tag">Космічна освіта · ESA</span>
-              <span>Партнерські матеріали</span>
-            </div>
-            <h3>Освітні ресурси Європейського космічного агентства для школярів</h3>
-            <p>Добірка інженерних проєктів Moon Camp і CanSat для учнів, які цікавляться наукою й технологіями.</p>
-            <a class="news-link" href="https://www.esa.int/Education" target="_blank" rel="noopener noreferrer" data-action="news.ext.esa">Читати на джерелі (ESA Education) →</a>
-          </article>
-          <article class="news-box">
-            <div class="news-meta">
-              <span class="news-tag">Шкільний архів</span>
-              <span>Жовтень 2026</span>
-            </div>
-            <h3>Оновлено електронну бібліотеку конспектів і завдань</h3>
-            <p>До каталогу EduPlatform додано довідники з інформатики, математики та проєктного дизайну.</p>
-          </article>
-        </div>
+        <div class="news-schema-grid" id="moreNewsBox" style="margin-top:22px" hidden></div>
 
         <div class="more-news-wrap">
           <button type="button" class="more-news-bar" data-action="main.more_news">
@@ -2043,7 +1937,104 @@ document.addEventListener("click", e => {
   }
 });
 
+/* ---------- Randomized News (4 invented school news shuffled across slots + 12 rotating real neutral news) ---------- */
+const SCHOOL_NEWS = [
+  {
+    tag: "Шкільні новини", date: "14 листопада 2026",
+    title: "У школі відкрили оновлену STEM-лабораторію робототехніки та 3D-друку",
+    text: "Новий кабінет оснащено 3D-принтерами, наборами мікроконтролерів і датчиків для практичних занять старшокласників з інформатики та інженерії."
+  },
+  {
+    tag: "Шкільні новини", date: "08 листопада 2026",
+    title: "Команда 10-х класів перемогла на міському хакатоні з веброзробки",
+    text: "Учні створили адаптивний сервіс шкільного розкладу з високою читабельністю інтерфейсу та продуманою типографікою."
+  },
+  {
+    tag: "Шкільні новини", date: "03 листопада 2026",
+    title: "Учні долучилися до екологічної акції «Зелений двір» та оновили шкільний сквер",
+    text: "Спільними зусиллями старшокласників і викладачів на території закладу висаджено 40 молодих саджанців та облаштовано зону відпочинку."
+  },
+  {
+    tag: "Шкільні новини", date: "01 листопада 2026",
+    title: "Стартує осінній тиждень інформатики: квести, воркшопи та захист проєктів",
+    text: "Упродовж тижня на платформі EduPlatform відбудуться відкриті лекції ІТ-менторів, командний турнір із алгоритмів та воркшоп зі створення вебмакетів у Figma."
+  }
+];
+
+const REAL_NEWS = [
+  { id: "nasa_webb", tag: "Наука · NASA", date: "Світ науки", title: "Телескоп Джеймса Вебба досліджує далекі галактики та екзопланети", text: "Космічна обсерваторія NASA передає інфрачервоні спостереження далеких планетних атмосфер і процесів народження зір.", url: "https://science.nasa.gov/mission/webb/", src: "NASA Webb" },
+  { id: "esa_astropi", tag: "Космос · Astro Pi", date: "Освітній проєкт", title: "Школярі запускають власний код на Міжнародній космічній станції", text: "У межах European Astro Pi Challenge учні пишуть програми на Python для бортових сенсорів на МКС.", url: "https://astro-pi.org/", src: "Astro Pi" },
+  { id: "cern_lhc", tag: "Фізика · CERN", date: "Дослідження", title: "Великий адронний колайдер: як працюють сучасні детектори частинок", text: "Дослідники з десятків країн аналізують великі обсяги даних, вивчаючи фундаментальну будову матерії.", url: "https://home.cern/science/accelerators/large-hadron-collider", src: "CERN" },
+  { id: "unesco_edu", tag: "Освіта · UNESCO", date: "Цифрова грамотність", title: "ЮНЕСКО підтримує розвиток цифрової грамотності та STEM-освіти", text: "Міжнародні рекомендації спрямовані на формування навичок безпечної роботи з інформацією та сучасними технологіями.", url: "https://www.unesco.org/en/education", src: "UNESCO" },
+  { id: "esa_edu", tag: "Космічна освіта · ESA", date: "Партнерські матеріали", title: "Освітні ресурси Європейського космічного агентства для школярів", text: "Добірка інженерних проєктів Moon Camp і CanSat для учнів, які цікавляться астрономією та інженерією.", url: "https://www.esa.int/Education", src: "ESA Education" },
+  { id: "nasa_artemis", tag: "Космос · NASA", date: "Місії", title: "Програма Artemis: підготовка до нових дослідницьких експедицій на Місяць", text: "Міжнародна космічна ініціатива об’єднує сучасні технології навігації, зв’язку та наукових експериментів на орбіті Місяця.", url: "https://www.nasa.gov/humans-in-space/artemis/", src: "NASA Artemis" },
+  { id: "nasa_mars", tag: "Астрономія · NASA", date: "Планетологія", title: "Дослідження Марса: марсоходи вивчають геологію та клімат червоної планети", text: "Автоматичні наукові станції передають на Землю знімки гірських порід і вимірювання атмосфери Марса.", url: "https://science.nasa.gov/mars/", src: "NASA Mars" },
+  { id: "w3c_wcag", tag: "Вебстандарти · W3C", date: "Доступність", title: "Міжнародні рекомендації WCAG щодо доступності та контрастності вебсайтів", text: "Стандарт W3C визначає правила читабельності тексту, контрасту кольорів та навігації для комфортного користування інтернетом.", url: "https://www.w3.org/WAI/standards-guidelines/wcag/", src: "W3C WAI" },
+  { id: "python_org", tag: "Технології · Python", date: "Програмування", title: "Мова Python залишається одним із головних інструментів у науці та освіті", text: "Завдяки простому синтаксису та великій екосистемі бібліотек Python широко використовується для навчання, вебу й аналізу даних.", url: "https://www.python.org/about/", src: "Python.org" },
+  { id: "nasa_earth", tag: "Екологія · NASA", date: "Спостереження Землі", title: "Супутники Earth Observatory допомагають відстежувати зміни клімату та лісів", text: "Відкриті супутникові знімки дозволяють науковцям і школярам аналізувати стан океанів, льодовиків та екосистем планети.", url: "https://earthobservatory.nasa.gov/", src: "NASA Earth" },
+  { id: "nobel_sci", tag: "Наука · Nobel Prize", date: "Відкриття", title: "Архів Нобелівських відкриттів: як фундаментальна наука змінює технології", text: "Освітні матеріали на офіційному порталі знайомлять із відкриттями у фізиці, хімії та медицині, що визначили сучасний світ.", url: "https://www.nobelprize.org/", src: "NobelPrize.org" },
+  { id: "nasa_hubble", tag: "Астрономія · Hubble", date: "Космос", title: "Телескоп Габбл понад три десятиліття допомагає вивчати історію Всесвіту", text: "Знімки легендарного космічного телескопа доповнюють нові інфрачервоні дані та відкривають деталі туманностей і скупчень зір.", url: "https://science.nasa.gov/mission/hubble/", src: "NASA Hubble" }
+];
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+function escHtml(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+function newsCardHtml(item, extraClass) {
+  const link = item.url
+    ? `<a class="news-link" href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(item.id)}">Читати на джерелі (${escHtml(item.src)}) →</a>`
+    : "";
+  return `<article class="news-box ${extraClass || ""}">
+    <div class="news-meta"><span class="news-tag">${escHtml(item.tag)}</span><span>${escHtml(item.date)}</span></div>
+    <h3>${escHtml(item.title)}</h3>
+    <p>${escHtml(item.text)}</p>
+    ${link}
+  </article>`;
+}
+function digestItemHtml(item) {
+  return `<div class="digest-item">
+    <div class="news-meta"><span class="news-tag">${escHtml(item.tag)}</span><span>${escHtml(item.date)}</span></div>
+    <h4>${escHtml(item.title)}</h4>
+    <p>${escHtml(item.text)}</p>
+    <a class="news-link" href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(item.id)}">Читати на джерелі (${escHtml(item.src)}) →</a>
+  </div>`;
+}
+function renderRandomNews() {
+  const school = shuffle(SCHOOL_NEWS);
+  const real = shuffle(REAL_NEWS);
+  // 4 invented school news + 2 random real news -> shuffle across ALL 6 main grid slots so school news jump around!
+  const mainSix = shuffle(school.concat(real.slice(0, 2)));
+  const digestTwo = real.slice(2, 4);
+  const moreTwo = real.slice(4, 6);
+
+  $("newsLeftCol").innerHTML = mainSix.slice(0, 4).map(it => newsCardHtml(it)).join("");
+  const topRight = newsCardHtml(mainSix[4]);
+  const feat = mainSix[5];
+  const featLink = feat.url
+    ? `<a class="news-link" style="margin-top:8px" href="${escHtml(feat.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(feat.id)}">Читати на джерелі (${escHtml(feat.src)}) →</a>`
+    : "";
+  const featCard = `<article class="news-box tall-feature">
+    <div>
+      <div class="news-meta"><span class="news-tag">${escHtml(feat.tag)}</span><span>${escHtml(feat.date)}</span></div>
+      <h3 style="margin-top:10px">${escHtml(feat.title)}</h3>
+      <p style="margin-top:12px">${escHtml(feat.text)}</p>
+      ${featLink}
+    </div>
+    <div class="digest-list">${digestTwo.map(digestItemHtml).join("")}</div>
+  </article>`;
+  $("newsRightCol").innerHTML = topRight + featCard;
+  $("moreNewsBox").innerHTML = moreTwo.map(it => newsCardHtml(it)).join("");
+}
+
 $("startTaskText").textContent = TASKS[ASSIGNED_TASK];
+renderRandomNews();
 renderRandomCaptcha();
 setScreen("start");
 })();
