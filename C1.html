@@ -580,6 +580,13 @@ h1, .exp-h1 {
   background: var(--surface-alt);
   border: 1px solid var(--border);
   display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.digest-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
   flex-direction: column;
   gap: 6px;
 }
@@ -592,6 +599,47 @@ h1, .exp-h1 {
 }
 .digest-item p {
   font-size: 15px;
+}
+.news-thumb-wrap {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 176px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  background: var(--surface-alt);
+  margin: 4px 0 2px;
+}
+.news-box.tall-feature .news-thumb-wrap {
+  max-height: 224px;
+}
+.digest-thumb-wrap {
+  display: block;
+  width: 112px;
+  height: 78px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  margin-top: 2px;
+}
+.news-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .22s ease;
+}
+.news-thumb-wrap:hover .news-thumb-img,
+.digest-thumb-wrap:hover .news-thumb-img {
+  transform: scale(1.03);
+}
+.news-thumb-img.thumb-contain {
+  object-fit: contain;
+  padding: 10px;
+  background: #ffffff;
 }
 
 /* "більше новин" banner */
@@ -1114,6 +1162,8 @@ h1, .exp-h1 {
 
 @media (max-width: 480px) {
   h1, .exp-h1 { font-size: min(var(--h-size), 34px); }
+  .digest-item { flex-direction: column; }
+  .digest-thumb-wrap { width: 100%; height: 140px; }
 }
 </style>
 </head>
@@ -1963,18 +2013,18 @@ const SCHOOL_NEWS = [
 ];
 
 const REAL_NEWS = [
-  { id: "nasa_webb", tag: "Наука · NASA", date: "Світ науки", title: "Телескоп Джеймса Вебба досліджує далекі галактики та екзопланети", text: "Космічна обсерваторія NASA передає інфрачервоні спостереження далеких планетних атмосфер і процесів народження зір.", url: "https://science.nasa.gov/mission/webb/", src: "NASA Webb" },
-  { id: "esa_astropi", tag: "Космос · Astro Pi", date: "Освітній проєкт", title: "Школярі запускають власний код на Міжнародній космічній станції", text: "У межах European Astro Pi Challenge учні пишуть програми на Python для бортових сенсорів на МКС.", url: "https://astro-pi.org/", src: "Astro Pi" },
-  { id: "cern_lhc", tag: "Фізика · CERN", date: "Дослідження", title: "Великий адронний колайдер: як працюють сучасні детектори частинок", text: "Дослідники з десятків країн аналізують великі обсяги даних, вивчаючи фундаментальну будову матерії.", url: "https://home.cern/science/accelerators/large-hadron-collider", src: "CERN" },
-  { id: "unesco_edu", tag: "Освіта · UNESCO", date: "Цифрова грамотність", title: "ЮНЕСКО підтримує розвиток цифрової грамотності та STEM-освіти", text: "Міжнародні рекомендації спрямовані на формування навичок безпечної роботи з інформацією та сучасними технологіями.", url: "https://www.unesco.org/en/education", src: "UNESCO" },
-  { id: "esa_edu", tag: "Космічна освіта · ESA", date: "Партнерські матеріали", title: "Освітні ресурси Європейського космічного агентства для школярів", text: "Добірка інженерних проєктів Moon Camp і CanSat для учнів, які цікавляться астрономією та інженерією.", url: "https://www.esa.int/Education", src: "ESA Education" },
-  { id: "nasa_artemis", tag: "Космос · NASA", date: "Місії", title: "Програма Artemis: підготовка до нових дослідницьких експедицій на Місяць", text: "Міжнародна космічна ініціатива об’єднує сучасні технології навігації, зв’язку та наукових експериментів на орбіті Місяця.", url: "https://www.nasa.gov/humans-in-space/artemis/", src: "NASA Artemis" },
-  { id: "nasa_mars", tag: "Астрономія · NASA", date: "Планетологія", title: "Дослідження Марса: марсоходи вивчають геологію та клімат червоної планети", text: "Автоматичні наукові станції передають на Землю знімки гірських порід і вимірювання атмосфери Марса.", url: "https://science.nasa.gov/mars/", src: "NASA Mars" },
-  { id: "w3c_wcag", tag: "Вебстандарти · W3C", date: "Доступність", title: "Міжнародні рекомендації WCAG щодо доступності та контрастності вебсайтів", text: "Стандарт W3C визначає правила читабельності тексту, контрасту кольорів та навігації для комфортного користування інтернетом.", url: "https://www.w3.org/WAI/standards-guidelines/wcag/", src: "W3C WAI" },
-  { id: "python_org", tag: "Технології · Python", date: "Програмування", title: "Мова Python залишається одним із головних інструментів у науці та освіті", text: "Завдяки простому синтаксису та великій екосистемі бібліотек Python широко використовується для навчання, вебу й аналізу даних.", url: "https://www.python.org/about/", src: "Python.org" },
-  { id: "nasa_earth", tag: "Екологія · NASA", date: "Спостереження Землі", title: "Супутники Earth Observatory допомагають відстежувати зміни клімату та лісів", text: "Відкриті супутникові знімки дозволяють науковцям і школярам аналізувати стан океанів, льодовиків та екосистем планети.", url: "https://earthobservatory.nasa.gov/", src: "NASA Earth" },
-  { id: "nobel_sci", tag: "Наука · Nobel Prize", date: "Відкриття", title: "Архів Нобелівських відкриттів: як фундаментальна наука змінює технології", text: "Освітні матеріали на офіційному порталі знайомлять із відкриттями у фізиці, хімії та медицині, що визначили сучасний світ.", url: "https://www.nobelprize.org/", src: "NobelPrize.org" },
-  { id: "nasa_hubble", tag: "Астрономія · Hubble", date: "Космос", title: "Телескоп Габбл понад три десятиліття допомагає вивчати історію Всесвіту", text: "Знімки легендарного космічного телескопа доповнюють нові інфрачервоні дані та відкривають деталі туманностей і скупчень зір.", url: "https://science.nasa.gov/mission/hubble/", src: "NASA Hubble" }
+  { id: "nasa_webb", tag: "Наука · NASA", date: "Світ науки", title: "Телескоп Джеймса Вебба досліджує далекі галактики та екзопланети", text: "Космічна обсерваторія NASA передає інфрачервоні спостереження далеких планетних атмосфер і процесів народження зір.", url: "https://science.nasa.gov/mission/webb/", src: "NASA Webb", img: "https://science.nasa.gov/wp-content/uploads/2024/05/jwst_artist_concept_0.png?w=600" },
+  { id: "esa_astropi", tag: "Космос · Astro Pi", date: "Освітній проєкт", title: "Школярі запускають власний код на Міжнародній космічній станції", text: "У межах European Astro Pi Challenge учні пишуть програми на Python для бортових сенсорів на МКС.", url: "https://astro-pi.org/", src: "Astro Pi", img: "https://images.ctfassets.net/yft5xyng9e7d/5Y2np9NcSuc4ELMSpCOSxO/e93dcd53d0e1230afd7f2e82aec44a4a/Astro_Pi_Website_Preview_1200_x_630_V1__1_.png?w=600" },
+  { id: "cern_lhc", tag: "Фізика · CERN", date: "Дослідження", title: "Великий адронний колайдер: як працюють сучасні детектори частинок", text: "Дослідники з десятків країн аналізують великі обсяги даних, вивчаючи фундаментальну будову матерії.", url: "https://home.cern/science/accelerators/large-hadron-collider", src: "CERN", img: "https://home.cern/wp-content/uploads/2026/11/Strip-Tracker-Extraction-1-768x512.jpg" },
+  { id: "unesco_edu", tag: "Освіта · UNESCO", date: "Цифрова грамотність", title: "ЮНЕСКО підтримує розвиток цифрової грамотності та STEM-освіти", text: "Міжнародні рекомендації спрямовані на формування навичок безпечної роботи з інформацією та сучасними технологіями.", url: "https://www.unesco.org/en/education", src: "UNESCO", img: "https://www.unesco.org/sites/default/files/styles/best_image/public/2022-06/Education%20transforms%20lives.jpg.webp?itok=uFv77WLB" },
+  { id: "esa_edu", tag: "Космічна освіта · ESA", date: "Партнерські матеріали", title: "Освітні ресурси Європейського космічного агентства для школярів", text: "Добірка інженерних проєктів Moon Camp і CanSat для учнів, які цікавляться астрономією та інженерією.", url: "https://www.esa.int/Education", src: "ESA Education", img: "https://education.esa.int/wp-content/uploads/2026/11/Space-Weather-Training-Course-2025.jpg" },
+  { id: "nasa_artemis", tag: "Космос · NASA", date: "Місії", title: "Програма Artemis: підготовка до нових дослідницьких експедицій на Місяць", text: "Міжнародна космічна ініціатива об’єднує сучасні технології навігації, зв’язку та наукових експериментів на орбіті Місяця.", url: "https://www.nasa.gov/humans-in-space/artemis/", src: "NASA Artemis", img: "https://www.nasa.gov/wp-content/uploads/2022/12/art002e021110large.jpg?w=600" },
+  { id: "nasa_mars", tag: "Астрономія · NASA", date: "Планетологія", title: "Дослідження Марса: марсоходи вивчають геологію та клімат червоної планети", text: "Автоматичні наукові станції передають на Землю знімки гірських порід і вимірювання атмосфери Марса.", url: "https://science.nasa.gov/mars/", src: "NASA Mars", img: "https://assets.science.nasa.gov/content/dam/science/psd/mars/resources/detail_files/7/7668_Mars-viking-2-orbiter-global-view-partial-valles-marinares-PIA04304-full2.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg" },
+  { id: "w3c_wcag", tag: "Вебстандарти · W3C", date: "Доступність", title: "Міжнародні рекомендації WCAG щодо доступності та контрастності вебсайтів", text: "Стандарт W3C визначає правила читабельності тексту, контрасту кольорів та навігації для комфортного користування інтернетом.", url: "https://www.w3.org/WAI/standards-guidelines/wcag/", src: "W3C WAI", img: "https://www.w3.org/assets/logos/w3c-2025/svg/w3c.svg", contain: true },
+  { id: "python_org", tag: "Технології · Python", date: "Програмування", title: "Мова Python залишається одним із головних інструментів у науці та освіті", text: "Завдяки простому синтаксису та великій екосистемі бібліотек Python широко використовується для навчання, вебу й аналізу даних.", url: "https://www.python.org/about/", src: "Python.org", img: "https://www.python.org/static/opengraph-icon-200x200.png", contain: true },
+  { id: "nasa_earth", tag: "Екологія · NASA", date: "Спостереження Землі", title: "Супутники Earth Observatory допомагають відстежувати зміни клімату та лісів", text: "Відкриті супутникові знімки дозволяють науковцям і школярам аналізувати стан океанів, льодовиків та екосистем планети.", url: "https://earthobservatory.nasa.gov/", src: "NASA Earth", img: "https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/iotd/2025/krasheninnikova-remains-restless/krasheninnikov_oli2_20251114_lrg.jpg?w=600" },
+  { id: "nobel_sci", tag: "Наука · Nobel Prize", date: "Відкриття", title: "Архів Нобелівських відкриттів: як фундаментальна наука змінює технології", text: "Освітні матеріали на офіційному порталі знайомлять із відкриттями у фізиці, хімії та медицині, що визначили сучасний світ.", url: "https://www.nobelprize.org/", src: "NobelPrize.org", img: "https://www.nobelprize.org/uploads/2018/09/New-will-fullsize-496x328.jpg" },
+  { id: "nasa_hubble", tag: "Астрономія · Hubble", date: "Космос", title: "Телескоп Габбл понад три десятиліття допомагає вивчати історію Всесвіту", text: "Знімки легендарного космічного телескопа доповнюють нові інфрачервоні дані та відкривають деталі туманностей і скупчень зір.", url: "https://science.nasa.gov/mission/hubble/", src: "NASA Hubble", img: "https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2023/07/hubble-space-telescope-hst-6.jpg?w=600" }
 ];
 
 function shuffle(arr) {
@@ -1988,12 +2038,21 @@ function shuffle(arr) {
 function escHtml(s) {
   return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 }
+function thumbHtml(item, wrapClass) {
+  if (!item.img) return "";
+  const imgCls = "news-thumb-img" + (item.contain ? " thumb-contain" : "");
+  return `<a class="${wrapClass}" href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(item.id)}">
+    <img class="${imgCls}" src="${escHtml(item.img)}" alt="${escHtml(item.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()">
+  </a>`;
+}
 function newsCardHtml(item, extraClass) {
+  const thumb = thumbHtml(item, "news-thumb-wrap");
   const link = item.url
     ? `<a class="news-link" href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(item.id)}">Читати на джерелі (${escHtml(item.src)}) →</a>`
     : "";
   return `<article class="news-box ${extraClass || ""}">
     <div class="news-meta"><span class="news-tag">${escHtml(item.tag)}</span><span>${escHtml(item.date)}</span></div>
+    ${thumb}
     <h3>${escHtml(item.title)}</h3>
     <p>${escHtml(item.text)}</p>
     ${link}
@@ -2001,10 +2060,13 @@ function newsCardHtml(item, extraClass) {
 }
 function digestItemHtml(item) {
   return `<div class="digest-item">
-    <div class="news-meta"><span class="news-tag">${escHtml(item.tag)}</span><span>${escHtml(item.date)}</span></div>
-    <h4>${escHtml(item.title)}</h4>
-    <p>${escHtml(item.text)}</p>
-    <a class="news-link" href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(item.id)}">Читати на джерелі (${escHtml(item.src)}) →</a>
+    ${thumbHtml(item, "digest-thumb-wrap")}
+    <div class="digest-body">
+      <div class="news-meta"><span class="news-tag">${escHtml(item.tag)}</span><span>${escHtml(item.date)}</span></div>
+      <h4>${escHtml(item.title)}</h4>
+      <p>${escHtml(item.text)}</p>
+      <a class="news-link" href="${escHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(item.id)}">Читати на джерелі (${escHtml(item.src)}) →</a>
+    </div>
   </div>`;
 }
 function renderRandomNews() {
@@ -2018,12 +2080,14 @@ function renderRandomNews() {
   $("newsLeftCol").innerHTML = mainSix.slice(0, 4).map(it => newsCardHtml(it)).join("");
   const topRight = newsCardHtml(mainSix[4]);
   const feat = mainSix[5];
+  const featThumb = thumbHtml(feat, "news-thumb-wrap");
   const featLink = feat.url
     ? `<a class="news-link" style="margin-top:8px" href="${escHtml(feat.url)}" target="_blank" rel="noopener noreferrer" data-action="news.ext.${escHtml(feat.id)}">Читати на джерелі (${escHtml(feat.src)}) →</a>`
     : "";
   const featCard = `<article class="news-box tall-feature">
     <div>
       <div class="news-meta"><span class="news-tag">${escHtml(feat.tag)}</span><span>${escHtml(feat.date)}</span></div>
+      ${featThumb}
       <h3 style="margin-top:10px">${escHtml(feat.title)}</h3>
       <p style="margin-top:12px">${escHtml(feat.text)}</p>
       ${featLink}
