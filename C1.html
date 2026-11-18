@@ -196,32 +196,29 @@ h1, .exp-h1 {
   width: 100%;
   padding: 11px 8px;
   border-radius: 12px;
-  border: 1.5px solid var(--border);
-  background: var(--btn-sec-bg);
-  color: var(--text);
+  border: 2px solid var(--primary-dark);
+  background: var(--primary);
+  color: var(--on);
   font-family: var(--font);
   font-size: 14px;
   font-weight: 500;
   line-height: 1.25;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 3px 0 var(--btn-sec-shadow), 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: transform .12s ease, box-shadow .12s ease, border-color .15s ease;
+  box-shadow: 0 3px 0 var(--primary-shadow), 0 4px 10px rgba(0, 0, 0, 0.14);
+  transition: transform .12s ease, box-shadow .12s ease;
 }
 .nav-btn:hover {
   transform: translateY(-1px);
-  border-color: var(--primary);
+  box-shadow: 0 4px 0 var(--primary-shadow), 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 .nav-btn:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 var(--btn-sec-shadow);
+  box-shadow: 0 1px 0 var(--primary-shadow);
 }
 .nav-btn:focus-visible {
-  outline: 3px solid var(--primary);
+  outline: 3px solid var(--text);
   outline-offset: 2px;
-}
-.nav-btn.accent-nav {
-  border-color: var(--primary);
 }
 
 .content-area {
@@ -240,7 +237,7 @@ h1, .exp-h1 {
   border-bottom: 2px solid var(--border);
 }
 
-/* ---------- Tactile Slightly-3D Buttons ---------- */
+/* ---------- Tactile Slightly-3D Buttons (Pure exact Table 2.1 --primary / --on contrast!) ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -255,56 +252,36 @@ h1, .exp-h1 {
   line-height: 1.25;
   cursor: pointer;
   text-decoration: none;
-  border: 2px solid transparent;
-  transition: transform .12s ease, box-shadow .12s ease, filter .14s ease, opacity .14s ease;
+  border: 2px solid var(--primary-dark);
+  background: var(--primary);
+  color: var(--on);
+  box-shadow: 0 4px 0 var(--primary-shadow), 0 7px 16px rgba(0, 0, 0, 0.16);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .14s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .btn:focus-visible {
   outline: 3px solid var(--text);
   outline-offset: 2px;
 }
-.btn-primary {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 92%, #ffffff) 0%, var(--primary) 55%, var(--primary-dark) 100%);
-  color: var(--on);
-  border-color: var(--primary-dark);
-  box-shadow: 0 4px 0 var(--primary-shadow), 0 7px 16px rgba(0, 0, 0, 0.16);
-}
-.btn-primary:hover:not(:disabled) {
+.btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  filter: brightness(1.04);
   box-shadow: 0 5px 0 var(--primary-shadow), 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-.btn-primary:active:not(:disabled) {
+.btn:active:not(:disabled) {
   transform: translateY(3px);
   box-shadow: 0 1px 0 var(--primary-shadow);
 }
-.btn-secondary {
-  background: var(--btn-sec-bg);
-  color: var(--text);
-  border-color: var(--border);
-  box-shadow: 0 4px 0 var(--btn-sec-shadow), 0 6px 14px rgba(0, 0, 0, 0.1);
+.btn-primary, .btn-secondary, .btn-trap {
+  background: var(--primary);
+  color: var(--on);
+  border: 2px solid var(--primary-dark);
+  box-shadow: 0 4px 0 var(--primary-shadow), 0 7px 16px rgba(0, 0, 0, 0.16);
 }
-.btn-secondary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: var(--primary);
-}
-.btn-secondary:active:not(:disabled) {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 var(--btn-sec-shadow);
-}
-.btn-trap {
-  background: var(--trap-bg);
-  color: var(--text);
-  border: 2px dashed var(--trap-border);
-  box-shadow: 0 4px 0 var(--trap-shadow), 0 5px 12px rgba(0, 0, 0, 0.08);
-}
-.btn-trap:hover { transform: translateY(-1px); }
-.btn-trap:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--trap-shadow); }
 .btn:disabled {
   opacity: 0.44;
   cursor: not-allowed;
   transform: none;
-  box-shadow: 0 2px 0 var(--btn-sec-shadow);
+  box-shadow: 0 2px 0 var(--primary-shadow);
 }
 
 /* Beveled "Назад" button matching Figma Group 9 / Group 10 */
@@ -316,18 +293,17 @@ h1, .exp-h1 {
   min-width: 164px;
   height: 48px;
   padding: 0 22px 0 30px;
-  border: 2px solid var(--border);
-  background: var(--btn-sec-bg);
-  color: var(--text);
+  border: 2px solid var(--primary-dark);
+  background: var(--primary);
+  color: var(--on);
   font-family: var(--font);
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   clip-path: polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%);
-  box-shadow: 0 3px 0 var(--btn-sec-shadow);
-  transition: transform .12s ease, filter .14s ease;
+  transition: transform .12s ease;
 }
-.btn-back-bevel:hover { transform: translateX(-2px); filter: brightness(0.98); }
+.btn-back-bevel:hover { transform: translateX(-2px); }
 .btn-back-bevel:active { transform: translateX(0); }
 
 /* ---------- Main Screen Hero & News Bands ---------- */
@@ -440,25 +416,24 @@ h1, .exp-h1 {
   gap: 8px;
   cursor: pointer;
   font-family: var(--font);
-  transition: transform .13s ease, box-shadow .13s ease, filter .14s ease;
-}
-.hero-btn-ask {
-  background: var(--btn-sec-bg);
-  color: var(--text);
-  border: 2px solid var(--border);
-  box-shadow: 0 5px 0 var(--btn-sec-shadow), var(--card-shadow);
-}
-.hero-btn-ask:hover { transform: translateY(-2px); border-color: var(--primary); }
-.hero-btn-ask:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--btn-sec-shadow); }
-
-.hero-btn-enroll {
-  background: linear-gradient(175deg, color-mix(in srgb, var(--primary) 90%, #ffffff) 0%, var(--primary) 55%, var(--primary-dark) 100%);
+  background: var(--primary);
   color: var(--on);
   border: 2px solid var(--primary-dark);
-  box-shadow: 0 6px 0 var(--primary-shadow), 0 14px 26px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 0 var(--primary-shadow), 0 12px 24px rgba(0, 0, 0, 0.16);
+  transition: transform .13s ease, box-shadow .13s ease;
 }
-.hero-btn-enroll:hover { transform: translateY(-2px); filter: brightness(1.04); }
-.hero-btn-enroll:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--primary-shadow); }
+.hero-big-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 var(--primary-shadow), 0 16px 28px rgba(0, 0, 0, 0.2);
+}
+.hero-big-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--primary-shadow);
+}
+.hero-btn-ask, .hero-btn-enroll {
+  background: var(--primary);
+  color: var(--on);
+}
 
 .hero-btn-title {
   font-size: clamp(22px, 2vw, 32px);
@@ -467,7 +442,6 @@ h1, .exp-h1 {
 }
 .hero-btn-sub {
   font-size: 15px;
-  opacity: 0.88;
   max-width: 28ch;
 }
 
@@ -1139,8 +1113,8 @@ h1, .exp-h1 {
       <div class="brand-label">EduPlatform</div>
     </div>
     <nav class="nav-list">
-      <button type="button" class="nav-btn accent-nav" data-action="nav.news">Новини</button>
-      <button type="button" class="nav-btn accent-nav" data-action="nav.courses">Курси</button>
+      <button type="button" class="nav-btn" data-action="nav.news">Новини</button>
+      <button type="button" class="nav-btn" data-action="nav.courses">Курси</button>
       <button type="button" class="nav-btn" data-action="nav.schedule">Розклад</button>
       <button type="button" class="nav-btn" data-action="nav.teachers">Учителям</button>
       <button type="button" class="nav-btn" data-action="nav.parents">Батькам</button>
