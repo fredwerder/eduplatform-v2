@@ -121,13 +121,13 @@ body {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .page-anim {
-  animation: pageEnter .21s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: pageEnter 75ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .modal-backdrop:not([hidden]) {
-  animation: backdropEnter .18s ease-out both;
+  animation: backdropEnter 75ms ease-out both;
 }
 .modal-backdrop:not([hidden]) .modal-stack {
-  animation: modalEnter .21s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: modalEnter 75ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
   .bg-shapes, .page-anim, .modal-backdrop:not([hidden]), .modal-backdrop:not([hidden]) .modal-stack { animation: none; }
@@ -151,7 +151,7 @@ h1, .exp-h1 {
   z-index: 1;
   display: flex;
   min-height: 100vh;
-  transition: filter .25s ease;
+  transition: filter 75ms ease;
 }
 .page-root.blurred {
   filter: blur(10px) saturate(0.95);
