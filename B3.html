@@ -108,8 +108,29 @@ body {
   50% { transform: translate3d(24px, -20px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes backdropEnter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modalEnter {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.page-anim {
+  animation: pageEnter .21s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.modal-backdrop:not([hidden]) {
+  animation: backdropEnter .18s ease-out both;
+}
+.modal-backdrop:not([hidden]) .modal-stack {
+  animation: modalEnter .21s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 @media (prefers-reduced-motion: reduce) {
-  .bg-shapes { animation: none; }
+  .bg-shapes, .page-anim, .modal-backdrop:not([hidden]), .modal-backdrop:not([hidden]) .modal-stack { animation: none; }
 }
 [hidden] { display: none !important; }
 
@@ -1607,9 +1628,18 @@ function showToast(msg) {
 }
 
 /* ---------- Screen Controller ---------- */
+function triggerEnter(el) {
+  if (!el) return;
+  el.classList.remove("page-anim");
+  void el.offsetWidth;
+  el.classList.add("page-anim");
+}
+
 function setScreen(name) {
+  const prev = curScreen;
   curScreen = name;
   const isOverlay = (name === "start" || name === "login" || name === "done_login");
+  const prevOverlay = (prev === "start" || prev === "login" || prev === "done_login");
 
   $("scrMain").hidden = !(name === "main" || isOverlay);
   $("scrCourses").hidden = (name !== "courses");
@@ -1626,7 +1656,11 @@ function setScreen(name) {
   $("ovLogin").hidden = (name !== "login");
   $("ovDoneLogin").hidden = (name !== "done_login");
 
-  if (!isOverlay) window.scrollTo({ top: 0, behavior: "instant" });
+  if (!isOverlay) {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    const map = { main: $("scrMain"), courses: $("scrCourses"), done_course: $("scrDoneCourse"), done_trap: $("scrDoneTrap") };
+    if (!(name === "main" && prevOverlay)) triggerEnter(map[name]);
+  }
 }
 
 /* ---------- Silent Google Sheets Publishing (Exact 27-Column Schema) ---------- */
