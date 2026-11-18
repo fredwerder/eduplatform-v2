@@ -663,7 +663,35 @@ h1, .exp-h1 {
   background: #ffffff;
 }
 
-/* "більше новин" banner */
+/* "більше новин" collapsible drawer + banner */
+.more-news-drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
+  transition: grid-template-rows 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, margin-top 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.more-news-drawer.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 22px;
+  pointer-events: auto;
+}
+.more-news-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.more-news-chevron {
+  display: inline-block;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.more-news-bar[aria-expanded="true"] .more-news-chevron {
+  transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .more-news-drawer, .more-news-chevron { transition: none; }
+}
 .more-news-wrap {
   margin: 26px 0 22px 0;
 }
@@ -1266,13 +1294,17 @@ h1, .exp-h1 {
           <div class="news-right-col" id="newsRightCol"></div>
         </div>
 
-        <!-- Extra news toggled by "більше новин" -->
-        <div class="news-schema-grid" id="moreNewsBox" style="margin-top:22px" hidden></div>
+        <!-- Extra news toggled smoothly by "більше новин" -->
+        <div class="more-news-drawer" id="moreNewsDrawer" aria-hidden="true">
+          <div class="more-news-inner">
+            <div class="news-schema-grid" id="moreNewsBox"></div>
+          </div>
+        </div>
 
         <div class="more-news-wrap">
-          <button type="button" class="more-news-bar" data-action="main.more_news">
+          <button type="button" class="more-news-bar" id="btnMoreNews" data-action="main.more_news" aria-expanded="false" aria-controls="moreNewsDrawer">
             <h2>Більше новин</h2>
-            <span class="btn btn-secondary" style="min-height:40px;pointer-events:none" id="moreNewsLbl">Розгорнути</span>
+            <span class="btn btn-secondary" style="min-height:40px;pointer-events:none"><span id="moreNewsLbl">Розгорнути</span> <span class="more-news-chevron" aria-hidden="true">▾</span></span>
           </button>
         </div>
       </div>
@@ -1941,10 +1973,12 @@ document.addEventListener("click", e => {
   }
   if (act === "main.more_news") {
     logEvent(act, "nav");
-    const box = $("moreNewsBox");
-    const isHidden = box.hidden;
-    box.hidden = !isHidden;
-    $("moreNewsLbl").textContent = isHidden ? "Згорнути" : "Розгорнути";
+    const drawer = $("moreNewsDrawer");
+    const opening = !drawer.classList.contains("open");
+    drawer.classList.toggle("open", opening);
+    drawer.setAttribute("aria-hidden", String(!opening));
+    $("btnMoreNews").setAttribute("aria-expanded", String(opening));
+    $("moreNewsLbl").textContent = opening ? "Згорнути" : "Розгорнути";
     return;
   }
   if (act.startsWith("news.ext.")) {
