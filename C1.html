@@ -1741,24 +1741,36 @@ function sheetSend(rows, useKeepalive) {
 window.addEventListener("online", () => { if (lsGet(DIRTY_KEY) === "1") sheetSend([]); });
 if (lsGet(DIRTY_KEY) === "1") sheetSend([]);
 
+function detectScreen() {
+  const vw = window.innerWidth || screen.width || 0;
+  const vh = window.innerHeight || screen.height || 0;
+  const minW = Math.min(vw || 9999, screen.width || 9999);
+  const coarse = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+  const uaMob = /Android|iPhone|iPod|Mobile|Windows Phone/i.test(navigator.userAgent || "");
+  const isMob = uaMob || (coarse && minW <= 900) || vw <= 768;
+  return { type: isMob ? "MOB" : "PC", res: vw + "x" + vh };
+}
+
 /* ---------- Telemetry & Metrics ---------- */
 function startSession() {
   if (S && !S.closed) return;
   const pid = makePid();
   const startedAt = new Date().toISOString();
+  const scr = detectScreen();
   S = {
     pid,
     task: ASSIGNED_TASK,
     t0: now(),
     startedAt,
     sid: CFG.id + "_" + startedAt.replace(/\D/g, "") + "_" + pid,
+    screen: scr,
     events: [],
     path: ["main"],
     endReason: null,
     tEnd: null,
     rowIndex: null,
     closed: false,
-    sub: { difficulty: "", difficulty_note: "", liking_1_5: "", liking_note: "" }
+    sub: { difficulty: "", difficulty_note: scr.res, liking_1_5: "", liking_note: scr.type }
   };
   setScreen("main");
 }
@@ -1825,9 +1837,11 @@ function buildRow() {
     t2_correct: m.reachedDone ? 1 : 0,
     t2_time_s: "",
     difficulty: sub.difficulty || "",
-    difficulty_note: sub.difficulty_note || "",
+    difficulty_note: (S.screen && S.screen.res) || sub.difficulty_note || "",
     liking_1_5: sub.liking_1_5 || "",
-    liking_note: sub.liking_note || "",
+    liking_note: (S.screen && S.screen.type) || sub.liking_note || "",
+    screen_format: (S.screen && S.screen.type) || "",
+    screen_resolution: (S.screen && S.screen.res) || "",
     path: S.path.join(">"),
     events: S.events.map(e => e.t + ":" + e.key).join(" | ")
   };
