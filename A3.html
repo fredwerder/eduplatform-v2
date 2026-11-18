@@ -1146,7 +1146,8 @@ h1, .exp-h1 {
           <header class="schema-topbar">
             <div class="topbar-brand">EduPlatform</div>
             <div class="topbar-right">
-              <button type="button" class="btn btn-primary" data-action="main.login" style="min-width:140px">Увійти</button>
+              <button type="button" class="btn btn-primary" id="mainLoginBtn" data-action="main.login" style="min-width:140px">Увійти</button>
+              <span class="nick-badge" id="mainUserNick" hidden>alex_k10</span>
               <div class="avatar-square" aria-hidden="true">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="8" r="4"/>
@@ -2034,6 +2035,10 @@ function renderRandomNews() {
 }
 
 $("startTaskText").textContent = TASKS[ASSIGNED_TASK];
+if (ASSIGNED_TASK === 1) {
+  $("mainLoginBtn").hidden = true;
+  $("mainUserNick").hidden = false;
+}
 renderRandomNews();
 renderRandomCaptcha();
 setScreen("start");
